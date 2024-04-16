@@ -5,7 +5,18 @@
 Ce projet django sera un projet pour visualiser les données d'API, s'inspirant de [Postman](https://www.postman.com)
 
 ## Instalation
-...
+### Virtual Env
+> Entrez les commandes suivantes dans le terminal à la racine du projet
+> ou exécutez le fichier lancer.sh
+```
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+cd api-tool/
+python3 manage.py migrate
+python3 manage.py runserver
+```
+
 
 ## Utilisation
 ...
