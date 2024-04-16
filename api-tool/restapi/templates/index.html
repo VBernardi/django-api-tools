@@ -1,0 +1,44 @@
+<table>
+    <thead>
+        <tr>
+    {% for k in keys %}
+            <th>
+                {{k}}
+            </th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+    {% for v in values %}
+            <td>
+                {% if v.0|length == 1 %}
+                {{v}}
+                {% else %}
+                <table style="border: black thin solid;">
+                    <thead>
+                        <tr>
+                            {% for key, val in v.items %}
+                            <th>
+                                {{key}}
+                            </th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% for key, val in v.items %}
+                            <td>
+                                {{val}}
+                            </td>
+                            {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+                {% endif %}
+                 
+            </td>
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>
