@@ -1,44 +1,36 @@
-<table>
-    <thead>
-        <tr>
-    {% for k in keys %}
-            <th>
-                {{k}}
-            </th>
+<div style="display: flex;">
+
+    <hr style="width: 2px; height: 1000px; border: none; background-color: black;position: absolute;left: 26%;">
+
+    <div class="request-list" style="width: 30%;">
+        <h2> Listes des requetes : </h2>
+        <ul>
+            {% for req in requests %}
+                <li>
+                    {% if selected and selected.name == req.name %}
+                        <a href="{{req.get_absolute_url}}" style="font-size: 30px;background-color:coral;border-radius: 7px;padding: 1%;">{{req.name}} </a>
+                        {% else %}
+                        <a href="{{req.get_absolute_url}}" style="font-size: 30px">{{req.name}} </a>
+                    {% endif %}
+                </li>
+                <br>
             {% endfor %}
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-    {% for v in values %}
-            <td>
-                {% if v.0|length == 1 %}
-                {{v}}
-                {% else %}
-                <table style="border: black thin solid;">
-                    <thead>
-                        <tr>
-                            {% for key, val in v.items %}
-                            <th>
-                                {{key}}
-                            </th>
-                            {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            {% for key, val in v.items %}
-                            <td>
-                                {{val}}
-                            </td>
-                            {% endfor %}
-                        </tr>
-                    </tbody>
-                </table>
-                {% endif %}
-                 
-            </td>
-            {% endfor %}
-        </tr>
-    </tbody>
-</table>
+        </ul>
+    </div>
+    
+
+    {% if selected %}
+    <div class="request-detail'" style="margin-top: 5%;margin-left: 3%;display: flex;gap:2%">
+        <select name="http-method" style="max-height: 45px;">
+            <option value="GET" {% if selected.http_method == 'GET' %} selected {% endif %}>GET</option>
+            <option value="POST" {% if selected.http_method == 'POST' %} selected {% endif %}>POST</option>
+            <option value="PUT" {% if selected.http_method == 'PUT' %} selected {% endif %}>PUT</option>
+            <option value="PATCH" {% if selected.http_method == 'PATCH' %} selected {% endif %}>PATCH</option>
+            <option value="DELETE" {% if selected.http_method == 'DELETE' %} selected {% endif %}>DELETE</option>
+            <option value="HEAD" {% if selected.http_method == 'HEAD' %} selected {% endif %}>HEAD</option>
+            <option value="OPTIONS" {% if selected.http_method == 'OPTIONS' %} selected {% endif %}>OPTIONS</option>
+        </select>
+        <textarea readonly style="width:650px; max-height: 45px;resize: none;padding: 2%; border-radius: 12px">{{selected}}</textarea>
+    </div>
+    {% endif %}
+</div>
