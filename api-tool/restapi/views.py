@@ -4,16 +4,20 @@ from django.http import HttpResponse
 import requests
 
 from .models import Request
+from .forms import RequestForm
 
 def index(request, request_id=None):
     template_name = "index.html"
-    context = {'requests': Request.objects.all()}
+    context = {'requests': Request.objects.all(), 'form':RequestForm()}
 
     if request_id is not None:
-        try:
-            context['selected'] = Request.objects.get(id=request_id)
-        except:
+        if request_id == 0:
             pass
+        else:
+            try:
+                context['selected'] = Request.objects.get(id=request_id)
+            except:
+                pass
 
     return render(request, template_name, context)
 
